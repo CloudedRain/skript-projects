@@ -1,0 +1,26 @@
+on rightclick with prismarine crystals:
+ player is sneaking
+ name of player's tool is "&fCredits":
+  set {credits.%player%} to number of prismarine crystals in player's inventory
+  remove {credits.%player%} of prismarine crystals named "&fCredits" from player
+  add {credits.%player%} to player's balance
+  send "&a$%{credits.%player%}% has been added to your account."
+  
+on rightclick with sea lantern:
+ player is sneaking
+ name of player's tool is "&fCredit Block":
+  set {creditblocks.%player%} to number of sea lantern in player's inventory * 100
+  remove {creditblocks.%player%} of sea lantern named "&fCredit Block" from player
+  add {creditblocks.%player%} to player's balance
+  send "&a$%{creditblocks.%player%}% has been added to your account."
+
+command /withdraw <number>:
+	aliases: /wd, /with
+	trigger:
+		if player's balance is greater than or equal to arg-1:
+			remove arg-1 from player's balance
+			give player arg-1 of prismarine crystals named "&fCredits" with lore "&a&lCurrency%nl%%nl%&aShift + Rightclick to add to your balance"
+			send "&a$%arg-1% has been withdrawn from your account."
+		else:
+			send "&cYou dont have enough credits!"
+ 
